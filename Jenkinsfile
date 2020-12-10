@@ -1,32 +1,17 @@
-pipeline {
-    agent dockermts {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000 -p 5000:5000' 
+node('docker'){
+    def customImage //variable to define the built image
+    
+    stage('Checkout SCM'){
+        checkout scm
         }
-    }
-    environment {
-        CI = 'true'
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
+        
+    stage('Docker build'){
+        customImage = docker.build("myimage:${env.BUILD_ID}") //build the image in the docker file using the tag as "myImage:build_number"
+        }
+        
+    stage('Docker push'){
+            docker.withRegistry('https://docker-registry-pl-test-31.pl.s2-eu.capgemini.com/', '02b7f7c3-2109-4970-bd30-a664bcb40463') { //Push the image to private registry 
+            customImage.push()
             }
         }
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
-            }
-        }
-        stage('Push') {
-            steps {
-                docker.withRegistry('https://registry.example.com', 'credentials-id') {
-                def customImage = docker.build("my-image:${env.BUILD_ID}")
-                /* Push the container to the custom Registry */
-                customImage.push()
-            }
-        }
-    }
-  }
 }
