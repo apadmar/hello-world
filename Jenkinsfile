@@ -10,7 +10,7 @@ node('docker'){
         }
         
     stage('Docker push'){
-            docker.withRegistry('https://docker-registry-pl-test-31.pl.s2-eu.capgemini.com/', '02b7f7c3-2109-4970-bd30-a664bcb40463') { //Push the image to private registry 
+            docker.withRegistry('https://docker-registry-pldemo01.pl.s2-eu.capgemini.com/', '9fe24276-4593-4599-8778-f31e4de846fb') { //Push the image to private registry 
             customImage.push()
             }
         }
