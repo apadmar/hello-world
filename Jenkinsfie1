@@ -5,7 +5,7 @@ registry = "archanapr/firstrepo" //YourDockerhubAccount/YourRepository
 registryCredential = 'archanapr' //dockerhub_id
 dockerImage = ''
 }
-agent any
+//agent any
 stages {
 stage('Cloning our Git') {
 steps {
