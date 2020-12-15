@@ -9,7 +9,8 @@ dockerImage = ''
 stages {
 stage('Cloning our Git') {
 steps {
-git 'https://github.com/apadmar/hello-world.git' //https://github.com/YourGithubAccount/YourGithubRepository.git'
+checkout scm 
+//git 'https://github.com/apadmar/hello-world.git' //https://github.com/YourGithubAccount/YourGithubRepository.git'
 }
 }
 stage('Building our image') {
