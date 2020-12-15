@@ -1,5 +1,5 @@
 pipeline {
-agent {dockermts}
+agent {label 'dockermts' }
 environment {
 registry = "archanapr/firstrepo" //YourDockerhubAccount/YourRepository
 registryCredential = 'archanapr' //dockerhub_id
