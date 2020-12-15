@@ -1,4 +1,5 @@
 pipeline {
+agent dockermts {
 environment {
 registry = "archanapr/firstrepo" //YourDockerhubAccount/YourRepository
 registryCredential = 'archanapr' //dockerhub_id
@@ -30,6 +31,7 @@ dockerImage.push()
 stage('Cleaning up') {
 steps{
 sh "docker rmi $registry:$BUILD_NUMBER"
+}
 }
 }
 }
