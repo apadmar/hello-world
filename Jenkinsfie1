@@ -1,5 +1,5 @@
 pipeline {
-agent dockermts {
+agent {dockermts}
 environment {
 registry = "archanapr/firstrepo" //YourDockerhubAccount/YourRepository
 registryCredential = 'archanapr' //dockerhub_id
@@ -35,4 +35,4 @@ sh "docker rmi $registry:$BUILD_NUMBER"
 }
 }
 }
-}
+
