@@ -22,7 +22,7 @@ dockerImage = docker.build registry + ":$BUILD_NUMBER"
 stage('Deploy our image') {
 steps{
 script {
-docker.withRegistry( '', 0ee496ea-22b4-4338-82e6-b15ac0fc53e5 ) {
+docker.withRegistry( '', '0ee496ea-22b4-4338-82e6-b15ac0fc53e5' ) {
 dockerImage.push()
 }
 }
