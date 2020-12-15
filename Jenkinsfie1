@@ -1,0 +1,35 @@
+pipeline {
+environment {
+registry = "archanapr/firstrepo" //YourDockerhubAccount/YourRepository
+registryCredential = 'archanapr' //dockerhub_id
+dockerImage = ''
+}
+agent any
+stages {
+stage('Cloning our Git') {
+steps {
+git 'https://github.com/apadmar/hello-world.git' //https://github.com/YourGithubAccount/YourGithubRepository.git'
+}
+}
+stage('Building our image') {
+steps{
+script {
+dockerImage = docker.build registry + ":$BUILD_NUMBER"
+}
+}
+}
+stage('Deploy our image') {
+steps{
+script {
+docker.withRegistry( '', 0ee496ea-22b4-4338-82e6-b15ac0fc53e5 ) {
+dockerImage.push()
+}
+}
+}
+}
+stage('Cleaning up') {
+steps{
+sh "docker rmi $registry:$BUILD_NUMBER"
+}
+}
+}
